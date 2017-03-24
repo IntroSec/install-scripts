@@ -114,6 +114,18 @@ nethunter(){
 # Display menu
 show_menus() {
 	clear
+	echo "################################################################################"
+	echo "#"
+	echo "#    filename: kali-tools.sh"
+	echo "#     version: 1.0.1"
+	echo "# description: Script to install kali tools on RPI2/3"
+	echo "#      author: Andre Mattie"
+	echo "#       email: devel@introsec.ca"
+	echo "#         GPG: 5620 A200 6534 B779 08A8  B22B 0FA6 CD54 93EA 430D"
+	echo "#     bitcoin: 1LHsfZrES8DksJ41JAXULimLJjUZJf7Qns"
+	echo "#        date: 03/24/2017"
+	echo "#"
+	echo "################################################################################"
 	echo "~~~~~~~~~~~~~~~~~~~~~"	
 	echo " M A I N - M E N U"
 	echo "~~~~~~~~~~~~~~~~~~~~~"
