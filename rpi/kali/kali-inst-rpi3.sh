@@ -4,6 +4,7 @@
 #
 #    filename: kali-inst-rpi3.sh
 # description: Script to put image on SDcard of RPI2/3
+#     version: v1.0.1
 #      author: Andre Mattie
 #       email: devel@introsec.ca
 #         GPG: 5620 A200 6534 B779 08A8  B22B 0FA6 CD54 93EA 430D
@@ -13,7 +14,7 @@
 ################################################################################
 
 # variables
-DEVICE=$!
+DEVICE="$1"
 FILE="kali-2.1.2-rpi2.img.xz"
 IMAGE="kali-2.1.2-rpi2.img"
 SHA1SUM="db36fcd53c630fd32f2f8943dddd9f57b3673c5a"
@@ -32,7 +33,8 @@ function DOWNLOAD {
 }
 
 function INSTALL {
-	dd if=$IMAGE of=$DEVICE bs=512k
+	cd ~/tmp
+	`dd if=$IMAGE of=$DEVICE bs=512k`
 	exit 0
 }
 
