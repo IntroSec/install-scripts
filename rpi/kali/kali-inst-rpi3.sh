@@ -13,13 +13,12 @@
 ################################################################################
 
 # variables
-DEVICE=$1
+DEVICE=$!
 FILE="kali-2.1.2-rpi2.img.xz"
 IMAGE="kali-2.1.2-rpi2.img"
 SHA1SUM="db36fcd53c630fd32f2f8943dddd9f57b3673c5a"
-CHECK=`sha1sum $IMAGE > kali-2.1.2-rpi2.sha1'
-VERIFY=`cut -d* -f1 kali-2.1.2-rpi2.sha1`
-
+CHECKSUM="kali-2.1.2-rpi2.img.xz.sha1"
+VERIFY="$(sha1sum -c $CHECKSUM | awk '{print $2}')"
 
 # ensure user is root
 if [ "$(id -u)" -ne "0" ] ; then
@@ -27,39 +26,53 @@ if [ "$(id -u)" -ne "0" ] ; then
     exit 1
 fi
 
-if [ $1 == "" ]
+function DOWNLOAD {
+	wget https://images.offensive-security.com/arm-images/kali-2.1.2-rpi2.img.xz
+	exit 1
+}
+
+function INSTALL {
+	dd if=$IMAGE of=$DEVICE bs=512k
+	exit 0
+}
+
+if [ -z "$1" ]
 then
-	echo "Usage: kali-inst-rpi3.sh [sdcard location]
+	echo "Usage: kali-inst-rpi3.sh [sdcard location]"
 	echo "Example; ./kali-inst-rpi3.sh /dev/mmcblk0"
+fi
 
 # make tmp folder and cd into it
 mkdir ~/tmp
 cd ~/tmp
+
 # download Kali image for RPI2/3
-wget https://images.offensive-security.com/arm-images/kali-2.1.2-rpi2.img.xz
+if [ ! -f $FILE ];
+then
+	echo "The file $FILE in not found. downloading file now..."
+	DOWNLOAD
+else
+	echo "The file $FILE exists."
+
+fi
+
 
 # verify downloaded image
-echo "Checking file: kali-2.1.2-rpi2.img"
-echo "Using SHA1 file: kali-2.1.2-rpi2.sha1"
-echo $CHECK
-echo $VERIFY
+echo -e $SHA1SUM $FILE > $CHECKSUM
+echo "Checking file: $FILE"
+echo "Using SHA1 file: $CHECKSUM"
 
-if [ $VERIFY != $SHA1SUM ]
+if [ $VERIFY != "OK" ];
 then
-  echo "SHA1 sums don't match, please redownload the image"
+	echo "SHA1 sums dont match, file if corrupted. Please re-download the image"
 else
-  echo "checksums OK"
+	# unzip image is checksums are good
+	echo "checksums OK"
+	echo "Decompressing Kali image"
+	xz -d $FILE
+	echo "Decompression of Kali image finished"
+	echo "Installing image to $DEVICE"
+	INSTALL
 fi
 
-# unzip image is checksums are good
-if [ $VERIFY == $SHA1SUM ]
-then
-	echo "Decompressing Kali image"
-	tar -xf kali-2.1.2-rpi2.img.xz
-	echo "Decompression of Kali image finished"
-	wait 10
-	echo "installing image to $DEVICE"
-	dd if=$IMAGE of=$DEVICE bs=512k
-elif [ $VERIFY != $SHA1SUM ]
-	echo "checksums don't match, redownload image file and try again"
-fi
+exit 0
