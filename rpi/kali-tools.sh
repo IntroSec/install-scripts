@@ -27,87 +27,87 @@ pause(){
   read -p "Press [Enter] key to continue..." fackEnterKey
 }
 
-one(){
+all(){
 	echo "Installing kali-linux-all"
 	apt-get update 
 	apt-get install -y kali-linux-all
         pause
 }
 
-two(){
+full(){
 	echo "Installing kali-linux-full"
 	apt-get update
 	apt-get install -y kali-linux-full
         pause
 }
 
-three(){
-	echo "Installing kali-linux-all"
+pwtools(){
+	echo "Installing kali-linux-pwtools"
 	apt-get update
-	apt-get install -y kali-linux-all
+	apt-get install -y kali-linux-pwtools
         pause
 }
 
-four(){
-	echo "Installing kali-linux-all"
+web(){
+	echo "Installing kali-linux-web"
 	apt-get update
-	apt-get install -y kali-linux-all
+	apt-get install -y kali-linux-web
         pause
 }
 
-five(){
-	echo "Installing kali-linux-all"
+wireless(){
+	echo "Installing kali-linux-wireless"
 	apt-get update
-	apt-get install -y kali-linux-all
+	apt-get install -y kali-linux-wireless
         pause
 }
 
-six(){
-	echo "Installing kali-linux-all"
+forensic(){
+	echo "Installing kali-linux-forensic"
 	apt-get update
-	apt-get install -y kali-linux-all
+	apt-get install -y kali-linux-forensic
         pause
 }
 
-seven(){
-	echo "Installing kali-linux-all"
+gpu(){
+	echo "Installing kali-linux-gpu"
 	apt-get update
-	apt-get install -y kali-linux-all
+	apt-get install -y kali-linux-gpu
         pause
 }
 
-eight(){
-	echo "Installing kali-linux-all"
+rfid(){
+	echo "Installing kali-linux-rfid"
 	apt-get update
-	apt-get install -y kali-linux-all
+	apt-get install -y kali-linux-rfid
         pause
 }
 
-nine(){
-	echo "Installing kali-linux-all"
+sdr(){
+	echo "Installing kali-linux-sdr"
 	apt-get update
-	apt-get install -y kali-linux-all
+	apt-get install -y kali-linux-sdr
         pause
 }
 
-ten(){
-	echo "Installing kali-linux-all"
+voip(){
+	echo "Installing kali-linux-voip"
 	apt-get update
-	apt-get install -y kali-linux-all
+	apt-get install -y kali-linux-voip
         pause
 }
 
-eleven(){
-	echo "Installing kali-linux-all"
+top10(){
+	echo "Installing kali-linux-top10"
 	apt-get update
-	apt-get install -y kali-linux-all
+	apt-get install -y kali-linux-top10
         pause
 }
 
-twelve(){
-	echo "Installing kali-linux-all"
+nethunter(){
+	echo "Installing kali-linux-nethunter"
 	apt-get update
-	apt-get install -y kali-linux-all
+	apt-get install -y kali-linux-nethunter
         pause
 }
 
@@ -121,14 +121,14 @@ show_menus() {
 	echo "2) install kali-linux-full"
 	echo "3) install kali-linux-pwtools"
 	echo "4) install kali-linux-web"
-	echo "5) install kali-linux-web"
-	echo "6) install kali-linux-web"
-	echo "7) install kali-linux-web"
-	echo "8) install kali-linux-web"
-	echo "9) install kali-linux-web"
-	echo "10) install kali-linux-web"
-	echo "11) install kali-linux-web"
-	echo "12) install kali-linux-web"
+	echo "5) install kali-linux-wireless"
+	echo "6) install kali-linux-forensic"
+	echo "7) install kali-linux-gpu"
+	echo "8) install kali-linux-rfid"
+	echo "9) install kali-linux-sdr"
+	echo "10) install kali-linux-voip"
+	echo "11) install kali-linux-top10"
+	echo "12) install kali-linux-nethunter"
 	echo "99) Exit script"
 
 }
@@ -138,18 +138,18 @@ read_options(){
 	local choice
 	read -p "Enter choice [ 1 - 12] " choice
 	case $choice in
-		1) one ;;
-		2) two ;;
-		3) three ;;
-		4) four ;;
-		5) five ;;
-		6) six ;;
-		7) seven ;;
-		8) eight ;;
-		9) nine ;;
-		10) ten ;;
-		11) eleven ;;
-		12) twelve ;;
+		1) all ;;
+		2) full ;;
+		3) pwtools ;;
+		4) web ;;
+		5) wireless ;;
+		6) forensic ;;
+		7) gpu ;;
+		8) rfid ;;
+		9) sdr ;;
+		10) voip ;;
+		11) top10 ;;
+		12) nethunter ;;
 		99) exit 0;;
 		*) echo -e "${RED}Error...${STD}" && sleep 2
 	esac
